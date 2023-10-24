@@ -1,21 +1,30 @@
 package org.bookstore.database.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "books")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String name;
+    @Column
     private String author;
-    private Long userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Book() {
     }
 
-    public Book(Long id, String name, String author, Long userId) {
+    public Book(Long id, String name, String author, User user) {
         this.id = id;
         this.name = name;
         this.author = author;
-        this.userId = userId;
+        this.user = user;
     }
 
     public Long getId() {
@@ -42,12 +51,12 @@ public class Book {
         this.author = author;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -65,11 +74,18 @@ public class Book {
 
     @Override
     public String toString() {
+        if (user!=null) {
+            return "Book{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", author='" + author + '\'' +
+                    ", user=" + user.getUsername() +
+                    '}';
+        }
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
-                ", userId=" + userId +
                 '}';
     }
 }
