@@ -2,19 +2,16 @@ package org.bookstore.service.impl;
 
 import org.bookstore.database.entity.User;
 import org.bookstore.database.repository.UserRepository;
-import org.bookstore.database.repository.impl.UserRepositoryImpl;
 import org.bookstore.service.UserService;
 import org.bookstore.service.mapper.UserMapper;
-import org.bookstore.service.mapper.impl.UserMapperImpl;
 import org.bookstore.service.model.UserDto;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -59,21 +56,4 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public static void main(String[] args) {
-        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
-        configuration.configure();
-        configuration.buildSessionFactory();
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        UserRepository userRepository = new UserRepositoryImpl(sessionFactory);
-        UserMapper userMapper = new UserMapperImpl();
-        UserService userService = new UserServiceImpl(userRepository, userMapper);
-        UserDto userDto = new UserDto();
-        userDto.setUsername("rokky");
-//        System.out.println(userDto);
-//        System.out.println(userService.add(userDto));
-//        System.out.println(userService.updateById(11L, userDto));
-//        System.out.println(userRepository.findAll());
-//        userService.deleteById(10L);
-        System.out.println(userRepository.findAll());
-    }
 }

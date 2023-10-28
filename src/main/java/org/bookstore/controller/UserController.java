@@ -21,23 +21,24 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll());
     }
 
-    @GetMapping("/userById/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/users")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto addDto) {
         return ResponseEntity.ok(userService.add(addDto));
     }
 
-    @PutMapping("/updateById/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<UserDto> updateUserById(@PathVariable Long id, @RequestBody UserDto updateDto) {
         return ResponseEntity.ok(userService.updateById(id, updateDto));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
+        userService.deleteById(id);
         return ResponseEntity.ok(id);
     }
 

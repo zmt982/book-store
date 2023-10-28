@@ -21,23 +21,24 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAll());
     }
 
-    @GetMapping("/bookById/{id}")
+    @GetMapping("/books/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
         return ResponseEntity.ok(bookService.getById(id));
     }
 
-    @PostMapping("/addBook")
+    @PostMapping("/books")
     public ResponseEntity<BookDto> addBook(@RequestBody BookDto addDto) {
         return ResponseEntity.ok(bookService.add(addDto));
     }
 
-    @PutMapping("/updateById/{id}")
+    @PutMapping("/books/{id}")
     public ResponseEntity<BookDto> updateBookById(@PathVariable Long id, @RequestBody BookDto updateDto) {
         return ResponseEntity.ok(bookService.updateById(id, updateDto));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/books/{id}")
     public ResponseEntity<Long> deleteBook(@PathVariable Long id) {
+        bookService.deleteById(id);
         return ResponseEntity.ok(id);
     }
 

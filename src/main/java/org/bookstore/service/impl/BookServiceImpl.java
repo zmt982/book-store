@@ -22,9 +22,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getAll() {
-        Optional<List<Book>> optionalBooks = bookRepository.findAll();
-        List<Book> books = optionalBooks.orElseThrow(() -> new RuntimeException("No books found"));
-        return bookMapper.toDto(books);
+//        Optional<List<Book>> optionalBooks = bookRepository.findAll();
+//        List<Book> books = optionalBooks.orElseThrow(() -> new RuntimeException("No books found"));
+//        return bookMapper.toDto(books);
+        return bookMapper.toDto(bookRepository.findAll().orElseThrow(() -> new RuntimeException("No books found")));
     }
 
     @Override
